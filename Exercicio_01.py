@@ -1,26 +1,42 @@
-# Programa que pede dois números e realiza as operações básicas: 
-# soma, subtração, multiplicação e divisão.
-# Função para obter um número válido entre 0 e 10
-def obter_numero(mensagem):
-    while True:
-        try:
-            numero = int(input(mensagem))
-            if 0 <= numero < 10:
-                return numero
-            else:
-                print('Você errou, entre com um valor de 0 a 10.')
-        except ValueError:
-            print('Entrada inválida. Por favor, entre com um número inteiro.')
+# Utilizando listas faça um programa que faça 5 perguntas para uma pessoa sobre um crime.
+#  As perguntas são:
+# ""Telefonou para a vítima?""
+# ""Esteve no local do crime?""
+#""Mora perto da vítima?""
+#""Devia para a vítima?""
+#""Já trabalhou com a vítima?""
+#O programa deve no final emitir uma classificação sobre a participação
+#  da pessoa no crime. Se a pessoa responder positivamente a 2 questões ela deve ser
+# classificada como ""Suspeita"", entre 3 e 4 como ""Cúmplice"" e 5 como
+# ""Assassino"".Caso contrário,ele será classificado como""Inocente"".
 
-# Solicita os dois números
-numero_1 = obter_numero('Entre com um número de 0 a 10: ')
-numero_2 = obter_numero('Entre com outro número de 0 a 10: ')
+# Lista de perguntas
+perguntas = [
+    "Telefonou para a vítima?",
+    "Esteve no local do crime?",
+    "Mora perto da vítima?",
+    "Devia para a vítima?",
+    "Já trabalhou com a vítima?"
+]
 
-# Realiza as operações
-soma = numero_1 + numero_2
-subtracao = numero_1 - numero_2
-multiplicacao = numero_1 * numero_2
-divisao = numero_1 / numero_2 if numero_2 != 0 else 'Indefinida (divisão por zero)'
+# Inicializa o contador de respostas positivas
+respostas_positivas = 0
 
-# Exibe os resultados
-print('Os valores somados são: {}, a subtração dos valores é: {}, a multiplicação dos valores é: {} e a divisão dos valores é: {}'.format(soma, subtracao, multiplicacao, divisao))
+# Loop para fazer as perguntas e coletar respostas
+for pergunta in perguntas:
+    resposta = input(pergunta + " (s/n): ").strip().lower()
+    if resposta == 's':
+        respostas_positivas += 1
+
+# Classificação baseada nas respostas
+if respostas_positivas == 2:
+    classificacao = "Suspeita"
+elif 3 <= respostas_positivas <= 4:
+    classificacao = "Cúmplice"
+elif respostas_positivas == 5:
+    classificacao = "Assassino"
+else:
+    classificacao = "Inocente"
+
+# Exibe a classificação final
+print(f"A pessoa foi classificada como: {classificacao}")
